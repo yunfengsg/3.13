@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: yyf-app
+spec:
+  project: default
+  source:
+    repoURL: "https://github.com/yunfengsg/3.13.git"
+    targetRevision: main
+    path: argo
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: yyf-ns
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
